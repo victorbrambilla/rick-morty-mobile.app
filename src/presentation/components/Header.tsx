@@ -1,16 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native'
 import { Appbar } from 'react-native-paper'
 
 export const Header = () => {
-
   return (
     <>
-    <StatusBar style={'light'}/>
-    <Appbar.Header dark={true} style={styles.container}>
-    <Image source={require('../../../assets/logo.png')} style={styles.logo} />
-    </Appbar.Header>
+      <StatusBar style={'light'} />
+      <Appbar.Header dark={true} style={styles.container}>
+        <Image source={require('../../../assets/logo.png')} style={styles.logo} />
+      </Appbar.Header>
     </>
   )
 }
@@ -18,15 +17,15 @@ export const Header = () => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    justifyContent:'center',
+    justifyContent: 'center',
     height: 80,
-    backgroundColor: 'rgb(18, 18, 18);s',
+    backgroundColor: 'rgb(18, 18, 18);',
   },
-  title:{
+  title: {
     color: 'white',
   },
   logo: {
     width: 200,
     height: 60,
-  }
-});
+  },
+})
