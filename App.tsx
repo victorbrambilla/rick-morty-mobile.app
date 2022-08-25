@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
+import { CharacterProvider } from './src/presentation/hooks/useCharacter'
 import { Home } from './src/presentation/pages/Home'
 
 export const theme = {
@@ -18,7 +19,9 @@ export const theme = {
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <Home />
+      <CharacterProvider>
+        <Home />
+      </CharacterProvider>
     </PaperProvider>
   )
 }

@@ -1,27 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Searchbar, TextInput, useTheme } from 'react-native-paper'
+import { TextInput, useTheme } from 'react-native-paper'
 import { PaperSelect } from 'react-native-paper-select'
 import { FilterTypes } from '../enums/filterTypes'
 import { genders } from '../enums/gender'
 import { species } from '../enums/species'
 import { status } from '../enums/status'
+import { useCharacter } from '../hooks/useCharacter'
 
 export const Filter = () => {
-  const [filterTypeValue, setFilterTypeValue] = useState('Nenhum')
-  const [filterValue, setFilterValue] = useState('')
+  const { filterType, filterValue, setFilterType, setFilterValue } = useCharacter()
   const { colors } = useTheme()
 
   const handreSetFilterTypeValue = (value: string) => {
-    setFilterTypeValue(value)
+    setFilterType(value)
     setFilterValue('')
   }
+  console.log(filterType)
 
   return (
     <>
       <PaperSelect
         label='Filtrar por'
-        value={filterTypeValue}
+        value={filterType}
         onSelection={(value: any) => {
           handreSetFilterTypeValue(value.text)
         }}
@@ -45,9 +46,9 @@ export const Filter = () => {
         modalDoneButtonText='Filtrar'
         errorText={''}
       />
-      {filterTypeValue !== 'Nenhum' && (
+      {filterType !== 'Nenhum' && (
         <>
-          {filterTypeValue === 'Gênero' && (
+          {filterType === 'Gênero' && (
             <PaperSelect
               label='Filtrar por gênero'
               value={filterValue}
@@ -75,7 +76,7 @@ export const Filter = () => {
               errorText={''}
             />
           )}
-          {filterTypeValue === 'Espécie' && (
+          {filterType === 'Espécie' && (
             <PaperSelect
               label='Filtrar por espécie'
               value={filterValue}
@@ -103,7 +104,7 @@ export const Filter = () => {
               errorText={''}
             />
           )}
-          {filterTypeValue === 'Status' && (
+          {filterType === 'Status' && (
             <PaperSelect
               label='Filtrar por status'
               value={filterValue}
@@ -131,19 +132,7 @@ export const Filter = () => {
               errorText={''}
             />
           )}
-          {filterTypeValue === 'Nome' && (
-            // <Searchbar
-            //   inputStyle={styles.in}
-            //   placeholder='Filtrar por nome'
-            //   onChangeText={(text) => setFilterValue(text)}
-            //   value={filterValue}
-            //   style={{
-            //     color: 'white',
-            //     backgroundColor: colors.background,
-            //   }}
-            //   elevation={0}
-            //   iconColor={colors.primary}
-            // />
+          {filterType === 'Nome' && (
             <TextInput
               label='Filtrar por nome'
               value={filterValue}
