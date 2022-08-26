@@ -12,11 +12,12 @@ export const Filter = () => {
   const { filterType, filterValue, setFilterType, setFilterValue } = useCharacter()
   const { colors } = useTheme()
 
-  const handreSetFilterTypeValue = (value: string) => {
+  const handleSetFilterTypeValue = (value: string) => {
+    if (value === 'Nenhum') {
+      setFilterValue('')
+    }
     setFilterType(value)
-    setFilterValue('')
   }
-  console.log(filterType)
 
   return (
     <>
@@ -24,7 +25,7 @@ export const Filter = () => {
         label='Filtrar por'
         value={filterType}
         onSelection={(value: any) => {
-          handreSetFilterTypeValue(value.text)
+          handleSetFilterTypeValue(value.text)
         }}
         arrayList={[...FilterTypes]}
         multiEnable={false}
