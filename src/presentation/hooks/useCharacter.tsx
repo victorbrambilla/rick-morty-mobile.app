@@ -26,7 +26,7 @@ interface CharacterContextData {
   setFilterValue: (value: string) => void
   page: number
   loading: boolean
-  handleChangePage: (event: ChangeEvent<unknown>, value: number) => void
+  handleChangePage: (type: string, currPage: number) => void
 }
 
 const CharacterContext = createContext<CharacterContextData>({} as CharacterContextData)
@@ -36,18 +36,17 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
   const [count, setCount] = useState<number>(0)
   const [filterType, setFilterType] = useState('Nenhum')
   const [filterValue, setFilterValue] = useState('')
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(false)
   const debouncedSearchTerm = useDebounce(filterValue, 500)
-  console.log('data')
 
   useEffect(() => {
     getData()
-  }, [debouncedSearchTerm, filterType, page])
+  }, [debouncedSearchTerm, page])
 
   const getData = useCallback(async () => {
     switch (filterType) {
-      case 'status':
+      case 'Status':
         if (debouncedSearchTerm) {
           setLoading(true)
           makeRemoteFilterCharactersByStatus()
@@ -61,7 +60,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
             })
         }
         break
-      case 'especie':
+      case 'Espécie':
         if (debouncedSearchTerm) {
           setLoading(true)
           makeRemoteFilterCharactersBySpecies()
@@ -75,7 +74,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
             })
         }
         break
-      case 'nome':
+      case 'Nome':
         if (debouncedSearchTerm) {
           setLoading(true)
           makeRemoteFilterCharactersByName()
@@ -102,7 +101,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
 
         break
 
-      case 'genero':
+      case 'Gênero':
         setLoading(true)
         makeRemoteFilterCharactersByGender()
           .perform({ page, gender: filterValue })
@@ -115,13 +114,22 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
           })
         break
     }
-  }, [debouncedSearchTerm, filterType, page])
+  }, [debouncedSearchTerm, filterType, page, filterValue])
 
-  const handleChangePage = (event: ChangeEvent<unknown>, value: number) => {
+  const handleChangePage = (type: string, currPage: number) => {
     if (filterType !== 'Nenhum' && !filterValue) {
       return
     }
-    setPage(value)
+    console.log('teste', currPage)
+    if (type === 'next') {
+      if (currPage <= count) {
+        setPage(currPage + 1)
+      }
+    } else {
+      if (currPage !== 1) {
+        setPage(currPage - 1)
+      }
+    }
   }
 
   return (
