@@ -19,7 +19,7 @@
     "expo-updates": "~0.14.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-native": "0.69.4",
+    "react-native": "0.69.5",
     "react-native-animated-pagination-dot": "^0.3.2",
     "react-native-paper": "^5.0.0-rc.4",
     "react-native-paper-select": "^0.3.0",
