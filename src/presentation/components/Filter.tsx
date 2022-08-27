@@ -1,5 +1,4 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
 import { TextInput, useTheme } from 'react-native-paper'
 import { PaperSelect } from 'react-native-paper-select'
 import { FilterTypes } from '../enums/filterTypes'
@@ -9,12 +8,13 @@ import { status } from '../enums/status'
 import { useCharacter } from '../hooks/useCharacter'
 
 export const Filter = () => {
-  const { filterType, filterValue, setFilterType, setFilterValue } = useCharacter()
+  const { filterType, filterValue, setFilterType, setFilterValue, setPage } = useCharacter()
   const { colors } = useTheme()
 
   const handleSetFilterTypeValue = (value: string) => {
     if (value === 'Nenhum') {
       setFilterValue('')
+      setPage(1)
     }
     setFilterType(value)
   }
@@ -153,8 +153,3 @@ export const Filter = () => {
     </>
   )
 }
-const styles = StyleSheet.create({
-  in: {
-    color: 'white',
-  },
-})
