@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { TextInput, useTheme } from 'react-native-paper'
 import { PaperSelect } from 'react-native-paper-select'
