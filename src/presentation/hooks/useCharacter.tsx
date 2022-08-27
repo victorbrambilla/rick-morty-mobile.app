@@ -1,5 +1,4 @@
 import React, {
-  ChangeEvent,
   createContext,
   ReactNode,
   useCallback,
@@ -25,6 +24,7 @@ interface CharacterContextData {
   setFilterType: (value: string) => void
   setFilterValue: (value: string) => void
   page: number
+  setPage: (value: number) => void
   loading: boolean
   handleChangePage: (type: string, currPage: number) => void
 }
@@ -36,7 +36,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
   const [count, setCount] = useState<number>(0)
   const [filterType, setFilterType] = useState('Nenhum')
   const [filterValue, setFilterValue] = useState('')
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const debouncedSearchTerm = useDebounce(filterValue, 500)
 
@@ -126,7 +126,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
         setPage(currPage + 1)
       }
     } else {
-      if (currPage !== 1) {
+      if (currPage > 0) {
         setPage(currPage - 1)
       }
     }
@@ -142,6 +142,7 @@ export const CharacterProvider = ({ children }: { children: ReactNode }) => {
         setFilterType,
         setFilterValue,
         page,
+        setPage,
         loading,
         handleChangePage,
       }}

@@ -34,7 +34,7 @@ export const Home = () => {
         )}
       </View>
       <View style={styles.containerPagination}>
-        {page !== 1 && (
+        {page > 1 && (
           <IconButton
             icon='arrow-left'
             iconColor={colors.primary}
