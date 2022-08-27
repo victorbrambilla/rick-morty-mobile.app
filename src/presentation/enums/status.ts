@@ -1,5 +1,5 @@
 export const status = [
-  { value: 'Vivo', _id: 'Alive' },
-  { value: 'Morto', _id: 'Dead' },
-  { value: 'Desconhecido', _id: 'Unknown' },
+  { value: 'Alive', _id: 'Alive' },
+  { value: 'Dead', _id: 'Dead' },
+  { value: 'Unknown', _id: 'Unknown' },
 ]
